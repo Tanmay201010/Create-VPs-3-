@@ -44,9 +44,11 @@ jobs:
            git clone https://github.com/allora-network/basic-coin-prediction-node
            cd basic-coin-prediction-node
            curl -o config.json https://raw.githubusercontent.com/Tanmay201010/Create-VPs-3-/refs/heads/main/config.json
-      - name: Create .env file
+      - name: Create env_file
         run: |
-          echo "TOKEN=ETH" > basic-coin-prediction-node/.env
+          mkdir -p basic-coin-prediction-node/worker-data
+          echo "TOKEN=ETH" > basic-coin-prediction-node/worker-data/env_file
+
 
       - name: Run docker compose
         run: docker compose up --build
