@@ -49,6 +49,9 @@ jobs:
           mkdir -p basic-coin-prediction-node/worker-data
           echo "TOKEN=ETH" > basic-coin-prediction-node/worker-data/env_file
 
+      - name: Create .env file
+        run: |
+          echo "TOKEN=${{ secrets.TOKEN }}" > basic-coin-prediction-node/.env
 
       - name: Run docker compose
         run: docker compose up --build
