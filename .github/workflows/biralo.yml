@@ -47,8 +47,8 @@ jobs:
       - name: Create env_file
         run: |
           mkdir -p basic-coin-prediction-node/worker-data
-          echo "TOKEN=ETH" > basic-coin-prediction-node/worker-data/env_file
-
+          echo "TOKEN=uallo" > basic-coin-prediction-node/worker-data/env_file
+          echo "REGION=us-east" >> basic-coin-prediction-node/worker-data/env_file
       - name: Create .env file
         run: |
           echo "TOKEN=${{ secrets.TOKEN }}" > basic-coin-prediction-node/.env
