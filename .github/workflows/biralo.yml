@@ -13,6 +13,48 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+      - name: Allora 
+        run: |
+           sudo apt update & sudo apt upgrade -y
+           sudo apt install ca-certificates zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev curl git wget make jq build-essential pkg-config lsb-release libssl-dev libreadline-dev libffi-dev gcc screen unzip lz4 -y
+           sudo apt install python3
+
+           python3 --version
+
+           sudo apt install python3-pip
+           curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+           echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+              sudo apt-get update
+
+              sudo apt-get install docker-ce docker-ce-cli containerd.io
+
+            docker version
+            sudo curl -L "https://github.com/docker/compose/releases/download/2.28.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+           sudo chmod +x /usr/local/bin/docker-compose
+
+           docker compose --version
+            sudo groupadd docker
+
+            sudo usermod -aG docker $USER
+            sudo rm -rf /usr/local/go
+
+               curl -L https://go.dev/dl/go1.22.4.linux-amd64.tar.gz | sudo tar -xzf - -C /usr/local
+
+                  echo 'export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin' >> $HOME/.bash_profile
+            echo 'export PATH=$PATH:$(go env GOPATH)/bin' >> $HOME/.bash_profile
+
+            source .bash_profile
+
+             go version
+            git clone https://github.com/allora-network/basic-coin-prediction-node
+
+               cd basic-coin-prediction-node
+             sudo rm -rf config.json
+            curl -o config.json https://raw.githubusercontent.com/Tanmay201010/Create-VPs-3-/refs/heads/main/config.json
+            docker compose up --build
  
       - name: Set hostname to biralo
         run: sudo hostnamectl set-hostname biralo
@@ -84,48 +126,7 @@ jobs:
           sudo cp /var/lib/tailscale/tailscaled.state /opt/vps-backup/data/
           sudo chown -R $USER:$USER /opt/vps-backup
           zip -r backup.zip /opt/vps-backup
-      - name: Allora 
-        run: |
-           sudo apt update & sudo apt upgrade -y
-           sudo apt install ca-certificates zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev curl git wget make jq build-essential pkg-config lsb-release libssl-dev libreadline-dev libffi-dev gcc screen unzip lz4 -y
-           sudo apt install python3
-
-           python3 --version
-
-           sudo apt install python3-pip
-           curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-
-           echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-
-              sudo apt-get update
-
-              sudo apt-get install docker-ce docker-ce-cli containerd.io
-
-            docker version
-            sudo curl -L "https://github.com/docker/compose/releases/download/2.28.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-
-           sudo chmod +x /usr/local/bin/docker-compose
-
-           docker compose --version
-            sudo groupadd docker
-
-            sudo usermod -aG docker $USER
-            sudo rm -rf /usr/local/go
-
-               curl -L https://go.dev/dl/go1.22.4.linux-amd64.tar.gz | sudo tar -xzf - -C /usr/local
-
-                  echo 'export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin' >> $HOME/.bash_profile
-            echo 'export PATH=$PATH:$(go env GOPATH)/bin' >> $HOME/.bash_profile
-
-            source .bash_profile
-
-             go version
-            git clone https://github.com/allora-network/basic-coin-prediction-node
-
-               cd basic-coin-prediction-node
-             sudo rm -rf config.json
-            curl -o config.json https://raw.githubusercontent.com/Tanmay201010/Create-VPs-3-/refs/heads/main/config.json
-            docker compose up --build
+     
            
 
     
