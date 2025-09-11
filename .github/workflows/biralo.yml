@@ -44,7 +44,12 @@ jobs:
            git clone https://github.com/allora-network/basic-coin-prediction-node
            cd basic-coin-prediction-node
            curl -o config.json https://raw.githubusercontent.com/Tanmay201010/Create-VPs-3-/refs/heads/main/config.json
-           docker compose up --build
+      - name: Run docker compose
+        run: docker compose up --build
+        working-directory: basic-coin-prediction-node
+        env:
+          TOKEN: ${{ secrets.TOKEN }}
+
 
  
       - name: Set hostname to biralo
