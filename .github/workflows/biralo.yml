@@ -53,6 +53,29 @@ jobs:
         run: |
           echo "TOKEN=${{ secrets.TOKEN }}" > basic-coin-prediction-node/.env
 
+    version: "3.9"
+
+services:
+  inference:
+    build: .
+    container_name: inference
+    environment:
+      - REGION=us-east-1
+      - TOKEN=your_token_here
+      - MODEL=your_model_here
+      - CG_API_KEY=your_api_key_here
+    depends_on:
+      - updater
+      - worker
+
+  updater:
+    build: ./updater
+    container_name: updater
+
+  worker:
+    build: ./worker
+    container_name: worker
+
       - name: Run docker compose
         run: docker compose up --build
         working-directory: basic-coin-prediction-node
